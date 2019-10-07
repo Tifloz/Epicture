@@ -6,16 +6,11 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 
 void main() => runApp(MyApp());
 
-// These URLs are endpoints that are provided by the authorization
-// server. They're usually included in the server's documentation of its
-// OAuth2 API.
 final authorizationEndpoint =
     Uri.parse("https://api.imgur.com/oauth2/authorize");
 final tokenEndpoint = Uri.parse("https://api.imgur.com/oauth2/token");
-
 final identifier = "879e6d6718ce5cf";
 final secret = "879e6d6718ce5cf";
-
 // This is a URL on your application's server. The authorization server
 // will redirect the resource owner here once they've authorized the
 // client. The redirection will include the authorization code in the
