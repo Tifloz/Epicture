@@ -1,7 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 void main() => runApp(MyApp());
+
+// These URLs are endpoints that are provided by the authorization
+// server. They're usually included in the server's documentation of its
+// OAuth2 API.
+final authorizationEndpoint =
+    Uri.parse("https://api.imgur.com/oauth2/authorize");
+final tokenEndpoint = Uri.parse("https://api.imgur.com/oauth2/token");
+
+final identifier = "879e6d6718ce5cf";
+final secret = "879e6d6718ce5cf";
+
+// This is a URL on your application's server. The authorization server
+// will redirect the resource owner here once they've authorized the
+// client. The redirection will include the authorization code in the
+// query parameters.
+final redirectUrl = Uri.parse("http://my-site.com/oauth2-redirect");
+
+/// A file in which the users credentials are stored persistently. If the server
+/// issues a refresh token allowing the client to refresh outdated credentials,
+/// these may be valid indefinitely, meaning the user never has to
+/// re-authenticate.
+final credentialsFile = new File("~/.myapp/credentials.json");
+
+/// Either load an OAuth2 client from saved credentials or authenticate a new
+/// one.
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -128,7 +156,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemBuilder:  (context, i) {
+        itemBuilder: (context, i) {
           if (i.isOdd) return Divider();
 
           final index = i ~/ 2;
@@ -139,3 +167,27 @@ class RandomWordsState extends State<RandomWords> {
         });
   }
 }
+
+class User {
+  final int id;
+  final String title;
+  final String body;
+
+  User({this.id, this.title, this.body});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      title: json['title'],
+      body: json['body'],
+    );
+  }
+}
+
+class ApiCall {
+  final int type;
+
+  ApiCall(this.type);
+}
+
+class PostCall {}
