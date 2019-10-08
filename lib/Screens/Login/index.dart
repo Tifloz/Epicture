@@ -92,30 +92,16 @@ class LoginScreenState extends State<LoginScreen>
                           new Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              new Tick(image: icon),
+                              // new Tick(image: icon),
                               new FormContainer(),
                               // new SignUp()
                             ],
                           ),
-                        //   animationStatus == 0
-                        //       ? new Padding(
-                        //           padding: const EdgeInsets.only(bottom: 50.0),
-                        //           child: new InkWell(
-                        //               onTap: () {
-                        //                 setState(() {
-                        //                   animationStatus = 1;
-                        //                 });
-                        //                 _playAnimation();
-                        //               },
-                        //               child: new SignIn()),
-                        //         )
-                        //       // : new StaggerAnimation(
-                        //           // buttonController:
-                        //               // _loginButtonController.view),
-                        // ],
-                      ),
+                        ]
+                      )
                     ],
                   ))),
         )));
   }
 }
+
