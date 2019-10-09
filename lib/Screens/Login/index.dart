@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:dev_epicture/Screens/Login/styles.dart';
 import 'styles.dart';
-// import 'loginAnimation.dart';
+import 'loginAnimation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'dart:async';
+import '../../Components/SignUpLink.dart';
 import '../../Components/Form.dart';
-// import '../../Components/SignInButton.dart';
+import '../../Components/SignInButton.dart';
+import '../../Components/WhiteTick.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 
@@ -69,9 +70,8 @@ class LoginScreenState extends State<LoginScreen>
         onWillPop: _onWillPop,
         child: new Scaffold(
           body: new Container(
-              decoration: new BoxDecoration(
-                image: background,
-              ),
+              // decoration: new BoxDecoration(
+              // ),
               child: new Container(
                   decoration: new BoxDecoration(
                       gradient: new LinearGradient(
@@ -82,7 +82,8 @@ class LoginScreenState extends State<LoginScreen>
                     stops: [0.2, 1.0],
                     begin: const FractionalOffset(0.0, 0.0),
                     end: const FractionalOffset(0.0, 1.0),
-                  )),
+                    )
+                  ),
                   child: new ListView(
                     padding: const EdgeInsets.all(0.0),
                     children: <Widget>[
@@ -92,16 +93,30 @@ class LoginScreenState extends State<LoginScreen>
                           new Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              // new Tick(image: icon),
+                              new Container(width: 250.0, height: 200.0, alignment: Alignment.center),
                               new FormContainer(),
-                              // new SignUp()
+                              new SignUp()
                             ],
                           ),
-                        ]
-                      )
+                          animationStatus == 0
+                              ? new Padding(
+                                  padding: const EdgeInsets.only(bottom: 50.0),
+                                  child: new InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          animationStatus = 1;
+                                        });
+                                        _playAnimation();
+                                      },
+                                      child: new SignIn()),
+                                )
+                              : new StaggerAnimation(
+                                  buttonController:
+                                      _loginButtonController.view),
+                        ],
+                      ),
                     ],
                   ))),
         )));
   }
 }
-
