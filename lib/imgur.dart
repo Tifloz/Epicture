@@ -14,7 +14,6 @@ class Imgur {
     } else {
       header["Authorization"] = "Client-ID " + globals.clientId;
     }
-
     return header;
   }
 
