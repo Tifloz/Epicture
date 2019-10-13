@@ -17,8 +17,7 @@ class LoginScreen extends StatefulWidget {
   LoginScreenState createState() => new LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen>
-    with TickerProviderStateMixin {
+class LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin {
   AnimationController _loginButtonController;
   var animationStatus = 0;
   @override
@@ -64,31 +63,18 @@ class LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 0.4;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    return (new WillPopScope(
-        onWillPop: _onWillPop,
-        child: new Scaffold(
+    return (new Scaffold(
           body: new Container(
-              // decoration: new BoxDecoration(
-              // ),
               child: new Container(
                   decoration: new BoxDecoration(
-                      gradient: new LinearGradient(
-                    colors: <Color>[
-                      const Color.fromRGBO(162, 146, 199, 0.8),
-                      const Color.fromRGBO(51, 51, 63, 0.9),
-                    ],
-                    stops: [0.2, 1.0],
-                    begin: const FractionalOffset(0.0, 0.0),
-                    end: const FractionalOffset(0.0, 1.0),
-                    )
+                    color: Color.fromRGBO(40, 40, 40, 1),
                   ),
                   child: new ListView(
                     padding: const EdgeInsets.all(0.0),
                     children: <Widget>[
                       new Stack(
                         alignment: AlignmentDirectional.bottomCenter,
+
                         children: <Widget>[
                           new Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -98,25 +84,14 @@ class LoginScreenState extends State<LoginScreen>
                               new SignUp()
                             ],
                           ),
-                          animationStatus == 0
-                              ? new Padding(
-                                  padding: const EdgeInsets.only(bottom: 50.0),
-                                  child: new InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          animationStatus = 1;
-                                        });
-                                        _playAnimation();
-                                      },
-                                      child: new SignIn()),
-                                )
-                              : new StaggerAnimation(
-                                  buttonController:
-                                      _loginButtonController.view),
+                          new StaggerAnimation( buttonController: _loginButtonController.view),
                         ],
+
                       ),
                     ],
-                  ))),
-        )));
+                  )
+                )
+            ),
+        ));
   }
 }
