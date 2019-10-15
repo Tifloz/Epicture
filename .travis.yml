@@ -63,7 +63,7 @@ script:
   - flutter doctor -v
 
   # Run Flutter build
-  - ./flutter/bin/flutter build apk
+  - ./flutter/bin/flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
 
 before_install:
   # Execute Travis prebuild webhook.
