@@ -56,14 +56,12 @@ before_script:
 
   # Add Flutter to the PATH environment variable.
   - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
-  - gem install coveralls-lcov
 
 script:
   # Prints the flutter version
   # (allows you to ensure, for each build, that Flutter is set up correctly.)
   - flutter doctor -v
 
-  - ./flutter/bin/flutter test --coverage test/unit_tests/* test/widget_tests/*
   # Run Flutter build
   - ./flutter/bin/flutter build apk
 
@@ -76,7 +74,6 @@ after_failure:
   - ./.travis/40_postbuild.sh failure $WEBHOOK_URL
 
 after_success:
-  - coveralls-lcov coverage/lcov.info
   # Export commit info
   - export AUTHOR_NAME=`git log -1 "$TRAVIS_COMMIT" --pretty="%aN"`
   - export COMMITTER_NAME=`git log -1 "$TRAVIS_COMMIT" --pretty="%cN"`
