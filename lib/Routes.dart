@@ -1,3 +1,4 @@
+import 'package:dev_epicture/Screens/Home/index.dart';
 import 'package:dev_epicture/Screens/Login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_epicture/auth/Auth.dart';
@@ -14,11 +15,11 @@ class Routes {
               settings: settings,
             );
 
-           case '/home':
-             return new MyCustomRoute(
-                 builder: (_) => new Auth(),
-               settings: settings,
-             );
+          case '/home':
+            return new MyCustomRoute(
+              builder: (_) => new Auth(),
+              settings: settings,
+            );
         }
       },
     ));

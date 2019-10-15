@@ -1,3 +1,4 @@
+import 'package:dev_epicture/auth/Auth.dart';
 import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'loginAnimation.dart';
@@ -13,13 +14,16 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
+
   @override
   LoginScreenState createState() => new LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin {
+class LoginScreenState extends State<LoginScreen>
+    with TickerProviderStateMixin {
   AnimationController _loginButtonController;
   var animationStatus = 0;
+
   @override
   void initState() {
     super.initState();
@@ -64,34 +68,34 @@ class LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin 
   @override
   Widget build(BuildContext context) {
     return (new Scaffold(
-          body: new Container(
-              child: new Container(
-                  decoration: new BoxDecoration(
-                    color: Color.fromRGBO(40, 40, 40, 1),
-                  ),
-                  child: new ListView(
-                    padding: const EdgeInsets.all(0.0),
+      body: new Container(
+          child: new Container(
+              decoration: new BoxDecoration(
+                color: Color.fromRGBO(40, 40, 40, 1),
+              ),
+              child: new ListView(
+                padding: const EdgeInsets.all(0.0),
+                children: <Widget>[
+                  new Stack(
+                    alignment: AlignmentDirectional.bottomCenter,
                     children: <Widget>[
-                      new Stack(
-                        alignment: AlignmentDirectional.bottomCenter,
-
+                      new Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          new Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              new Container(width: 250.0, height: 200.0, alignment: Alignment.center),
-                              new FormContainer(),
-                              new SignUp()
-                            ],
-                          ),
-                          new StaggerAnimation( buttonController: _loginButtonController.view),
+                          new Container(
+                              width: 250.0,
+                              height: 200.0,
+                              alignment: Alignment.center),
+                          new FormContainer(),
+                          new SignUp()
                         ],
-
                       ),
+                      new StaggerAnimation(
+                          buttonController: _loginButtonController.view),
                     ],
-                  )
-                )
-            ),
-        ));
+                  ),
+                ],
+              ))),
+    ));
   }
 }

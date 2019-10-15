@@ -12,16 +12,14 @@ class AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
-    String uri = AuthState.uri + "?client_id=${globals.clientId}&response_type=token";
+    String uri =
+        AuthState.uri + "?client_id=${globals.clientId}&response_type=token";
     return WebviewScaffold(
         clearCache: false,
         clearCookies: false,
-        appBar: AppBar(
-            title: Text("Auth")
-        ),
+        appBar: AppBar(title: Text("Auth")),
         url: uri,
-        withZoom: false
-    );
+        withZoom: false);
   }
 
   getParams(String url) {
@@ -45,7 +43,10 @@ class AuthState extends State<Auth> {
   void initState() {
     super.initState();
 
-    this._listener = this.flutterWebviewPlugin.onStateChanged.listen((WebViewStateChanged state) async {
+    this._listener = this
+        .flutterWebviewPlugin
+        .onStateChanged
+        .listen((WebViewStateChanged state) async {
       var url = state.url;
       RegExp exp = new RegExp("^$responseUri");
 
@@ -63,11 +64,10 @@ class AuthState extends State<Auth> {
         setState(() {
           globals.user = tmp;
         });
-     /*   var avatar = await Imgur.getAvatarAccount("me");
+        var avatar = await Imgur.getAvatar("me");
         setState(() {
           globals.user["avatar"] = avatar["avatar"];
-        });*/
-
+        });
         close();
       }
     });
@@ -82,7 +82,6 @@ class AuthState extends State<Auth> {
 }
 
 class Auth extends StatefulWidget {
-
   Auth({Key key}) : super(key: key);
 
   @override

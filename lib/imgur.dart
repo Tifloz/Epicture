@@ -43,8 +43,7 @@ class Imgur {
   /*
     "avatar" variable in data
   */
-  static getAvatar(username) async
-  {
+  static getAvatar(username) async {
     var uri = endPoint + "account/" + username + "/images";
     var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
     var data = json.decode(res.body)["data"];
@@ -52,8 +51,7 @@ class Imgur {
     return data;
   }
 
-  static getAccountImages(username) async
-  {
+  static getAccountImages(username) async {
     var uri = endPoint + "account/" + username + "/images";
     var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
     var data = json.decode(res.body)["data"];
@@ -61,28 +59,49 @@ class Imgur {
     return data;
   }
 
-  static allGallery(username) async
-  {
+  static allGallery(username) async {
     var uri = endPoint + "account/" + username;
-
   }
 
-  static getFavoriteGallery(username) async
-  {
-    var uri = endPoint + "account/" + username;
+  static getFavoriteGallery(
+      {String username, int page = 0, String sort = "newest"}) async {
+    var uri = endPoint + "account/$username/gallery_favorites/$page/$sort";
+    var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
 
+    return await json.decode(res.body)["data"];
   }
 
-  static searchGallery(username) async
-  {
-    var uri = endPoint + "account/" + username;
+  static createAlbum(title, description, privacy) async {
+    var url = endPoint + "album";
 
+    var response = await http.post(url,
+        headers: Imgur.getHeaders(),
+        body: {"title": title, "description": description, "privacy": privacy});
+    return await json.decode(response.body);
   }
 
-  static uploadImage(username) async
-  {
-    var uri = endPoint + "account/" + username;
+  static searchGallery({String search = "", int page = 0}) async {
+    var uri = endPoint +
+        "gallery/search/time/all/" +
+        page.toString() +
+        "?q=" +
+        search;
+    var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
 
+    return json.decode(res.body)["data"];
   }
 
+  static uploadImage(title, description, File image, privacy) async {
+    var url = endPoint + "image";
+    List<int> imageBytes = image.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+
+    var response = await http.post(url, headers: Imgur.getHeaders(), body: {
+      "title": title,
+      "description": description,
+      "image": base64Image,
+      "privacy": privacy
+    });
+    return await json.decode(response.body);
+  }
 }
