@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:developer' as developer;
 
 class Imgur {
-  static const globalEndpoint = "https://api.imgur.com/3/";
+  static const endPoint = "https://api.imgur.com/3/";
 
   static getHeaders() {
     Map<String, String> header = {};
@@ -33,13 +33,56 @@ class Imgur {
   }
 
   static getAccount(username) async {
-    var uri = globalEndpoint + "account/" + username;
-
+    var uri = endPoint + "account/" + username;
     var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
-
     var data = json.decode(res.body)["data"];
-    data["createdAt"] =
-        new DateTime.fromMillisecondsSinceEpoch(data["created"] * 1000);
+
     return data;
   }
+
+  /*
+    "avatar" variable in data
+  */
+  static getAvatar(username) async
+  {
+    var uri = endPoint + "account/" + username + "/images";
+    var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
+    var data = json.decode(res.body)["data"];
+
+    return data;
+  }
+
+  static getAccountImages(username) async
+  {
+    var uri = endPoint + "account/" + username + "/images";
+    var res = await http.get(Uri.encodeFull(uri), headers: Imgur.getHeaders());
+    var data = json.decode(res.body)["data"];
+
+    return data;
+  }
+
+  static allGallery(username) async
+  {
+    var uri = endPoint + "account/" + username;
+
+  }
+
+  static getFavoriteGallery(username) async
+  {
+    var uri = endPoint + "account/" + username;
+
+  }
+
+  static searchGallery(username) async
+  {
+    var uri = endPoint + "account/" + username;
+
+  }
+
+  static uploadImage(username) async
+  {
+    var uri = endPoint + "account/" + username;
+
+  }
+
 }
