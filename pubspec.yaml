@@ -15,9 +15,6 @@ description: A new Flutter application.
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
-module:
-  androidX: true
-
 dependencies:
   flutter:
     sdk: flutter
