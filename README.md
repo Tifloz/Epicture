@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/Tifloz/Epicture.svg?branch=master)](https://travis-ci.com/Tifloz/Epicture) [![Coverage Status](https://coveralls.io/repos/github/Tifloz/Epicture/badge.svg)](https://coveralls.io/github/Tifloz/Epicture)
 # dev_epicture
 
 A new Flutter application.
