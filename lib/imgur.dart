@@ -28,7 +28,6 @@ class Imgur {
 
     var res = await http.post(Uri.encodeFull(uri),
         headers: Imgur.getHeaders(), body: data);
-    developer.log(json.decode(res.body));
     return json.decode(res.body);
   }
 
