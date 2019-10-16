@@ -15,9 +15,14 @@ class Routes {
               settings: settings,
             );
 
-          case '/home':
+          case '/auth':
             return new MyCustomRoute(
               builder: (_) => new Auth(),
+              settings: settings,
+            );
+          case '/home':
+            return new MyCustomRoute(
+              builder: (_) => new HomeScreen(),
               settings: settings,
             );
         }

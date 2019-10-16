@@ -2,6 +2,7 @@ import 'package:dev_epicture/imgur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:dev_epicture/globals.dart' as globals;
+import 'dart:developer' as developer;
 
 class AuthState extends State<Auth> {
   TextEditingController textEditingController;
@@ -15,8 +16,8 @@ class AuthState extends State<Auth> {
     String uri =
         AuthState.uri + "?client_id=${globals.clientId}&response_type=token";
     return WebviewScaffold(
-        clearCache: false,
-        clearCookies: false,
+        clearCache: true,
+        clearCookies: true,
         appBar: AppBar(title: Text("Auth")),
         url: uri,
         withZoom: false);
@@ -58,7 +59,6 @@ class AuthState extends State<Auth> {
           globals.username = params["account_username"];
           globals.userId = params["account_id"];
           globals.expiresIn = int.parse(params["expires_in"]);
-          //globals.createdAt = new DateTime.now();
         });
         var tmp = await Imgur.getAccount("user");
         setState(() {

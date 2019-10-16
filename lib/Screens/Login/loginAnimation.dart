@@ -1,13 +1,16 @@
+import 'dart:io';
+import 'dart:developer' as developer;
+import 'package:dev_epicture/auth/Auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:dev_epicture/globals.dart' as globals;
 
 class StaggerAnimation extends StatelessWidget {
   StaggerAnimation({Key key, this.buttonController})
       : buttonSqueezeanimation = new Tween(
           begin: 320.0,
           end: 70.0,
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -19,8 +22,7 @@ class StaggerAnimation extends StatelessWidget {
         buttomZoomOut = new Tween(
           begin: 70.0,
           end: 1000.0,
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -33,8 +35,7 @@ class StaggerAnimation extends StatelessWidget {
         containerCircleAnimation = new EdgeInsetsTween(
           begin: const EdgeInsets.only(bottom: 50.0),
           end: const EdgeInsets.only(bottom: 0.0),
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -119,7 +120,14 @@ class StaggerAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     buttonController.addListener(() {
       if (buttonController.isCompleted) {
-        Navigator.pushNamed(context, "/home");
+        developer.log("TEST",
+            name: 'test.username', error: globals.accessToken);
+        if (globals.accessToken != null)
+          Navigator.pushNamed(context, "/home");
+        else
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Auth();
+          }));
       }
     });
     return new AnimatedBuilder(
