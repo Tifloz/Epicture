@@ -4,7 +4,6 @@ import 'package:dev_epicture/imgur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:dev_epicture/globals.dart' as globals;
-import 'dart:developer' as developer;
 
 class AuthState extends State<Auth> {
   TextEditingController textEditingController;
@@ -20,12 +19,12 @@ class AuthState extends State<Auth> {
     return WebviewScaffold(
         clearCache: false,
         clearCookies: false,
-        appBar: AppBar(title: Text("Auth")),
+        appBar: AppBar(title: Text("A")),
         url: uri,
         withZoom: false);
   }
 
-  getParams(String url) {
+  getParams(String url) async {
     var response = {};
     var params = url.substring(AuthState.responseUri.length);
 
@@ -38,7 +37,7 @@ class AuthState extends State<Auth> {
   }
 
   close() async {
-    var res = await flutterWebviewPlugin.close();
+    await flutterWebviewPlugin.close();
     Navigator.pop(context);
   }
 
@@ -51,11 +50,9 @@ class AuthState extends State<Auth> {
         .listen((WebViewStateChanged state) async {
       var url = state.url;
       RegExp exp = new RegExp(responseUri);
-
       if (exp.hasMatch(url)) {
-        var params = getParams(url);
-        stderr.writeln("C'est FIX BTARD");
-
+        var params = await getParams(url);
+        stderr.writeln("STARTED TO DEFINE VARIABLES");
         setState(() {
           stderr.writeln("J'suis dans l'game négro");
 
@@ -66,7 +63,9 @@ class AuthState extends State<Auth> {
           globals.expiresIn = int.parse(params["expires_in"]);
           stderr.writeln("Toujours làààà");
         });
-        var tmp = await Imgur.getAccount("user");
+        stderr.writeln("STARTED TO PRINT VARIABLE");
+        stderr.writeln(globals.accessToken);
+        var tmp = await Imgur.getAccount("me");
         setState(() {
           globals.user = tmp;
         });
@@ -75,7 +74,6 @@ class AuthState extends State<Auth> {
           globals.user["avatar"] = avatar["avatar"];
         });*/
         close();
-        Navigator.pushReplacementNamed(context, "/home");
       }
     });
   }

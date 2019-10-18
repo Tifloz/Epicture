@@ -34,25 +34,20 @@ set user(tmp) {
   }
 }
 
-String get userId => prefs?.get("userId");
+String userId;
 
-set userId(String value) => prefs?.setString("userId", value);
 
-String get accessToken => prefs?.get("accessToken");
+String accessToken ;
 
-set accessToken(String value) => prefs?.setString("accessToken", value);
 
-String get refreshToken => prefs?.get("refreshToken");
+String refreshToken;
 
-set refreshToken(String value) => prefs?.setString("refreshToken", value);
 
-String get username => prefs?.get("username");
+String username;
 
-set username(String value) => prefs?.setString("username", value);
 
-int get expiresIn => prefs?.get("expiresIn");
+int expiresIn ;
 
-set expiresIn(int value) => prefs?.setInt("expiresIn", value);
 
 DateTime get  createdAt {
   var tmp = prefs?.get("createdAt");

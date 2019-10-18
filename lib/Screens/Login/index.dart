@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dev_epicture/Screens/Home/index.dart';
 import 'package:dev_epicture/auth/Auth.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    stderr.writeln(globals.username);
     if (globals.username == null)
       return Container(
           child: Center(
@@ -26,7 +29,6 @@ class LoginScreenState extends State<LoginScreen> {
           }));
         },
       )));
-
     return HomeScreen();
   }
 

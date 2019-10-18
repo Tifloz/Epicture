@@ -9,28 +9,3 @@ import 'package:dev_epicture/Routes.dart';
 void main() {
   new Routes();
 }
-
-
-class User {
-  final int id;
-  final String title;
-  final String body;
-
-  User({this.id, this.title, this.body});
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'],
-      title: json['title'],
-      body: json['body'],
-    );
-  }
-}
-
-class ApiCall {
-  final int type;
-
-  ApiCall(this.type);
-}
-
-class PostCall {}
